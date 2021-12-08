@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-# TODO:
-# check out the palindrome formula
 # The palindrome can be written as
-# 11(9091a + 910b + 100c) = mn;
-# a,b & c being 1 digit integers and m & n being 3 digit integers.
-# Let 11 * 10 < m < 11 * 90;
+# 11(9091a + 910b + 100c)
+# 0 < a <= 9
+# 0 <= b, c <=9
 
 # A palindromic number reads the same both ways. The largest palindrome made from the product of
 # two 2-digit numbers is 9009 = 91 × 99.
@@ -43,4 +41,17 @@ def palindromes(range)
   palindromes
 end
 
+def largest_palindrome
+  (0..9).reverse_each do |b|
+    (0..9).reverse_each do |c|
+      palindrome = 11 * (81_819 + (910 * b) + (100 * c)) # 81_819 = 9019 * 9 because a = 9
+      (900..999).reverse_each do |divisor|
+        return palindrome if (palindrome % divisor).zero? && (palindrome / divisor) <= 999
+      end
+    end
+  end
+end
+
 puts palindromes((900..999)).max
+
+puts largest_palindrome
