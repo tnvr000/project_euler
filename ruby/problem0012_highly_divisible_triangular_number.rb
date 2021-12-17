@@ -25,20 +25,13 @@ def triangular_number(index)
   (index * (index + 1)) / 2
 end
 
-def factors(number)
-  factors = []
-  1.upto(number) do |divisor|
-    factors << divisor if (number % divisor).zero?
-  end
-  factors
-end
-
 def factors_count(number)
-  count = 1
-  2.upto(number) do |divisor|
+  count = 0
+  limit = Math.sqrt(number)
+  (1...limit.ceil).each do |divisor|
     count += 1 if (number % divisor).zero?
   end
-  count
+  (number % limit).zero? ? count * 2 + 1 : count * 2
 end
 
 def required_triangular_number_index(factor_limit)
@@ -50,4 +43,4 @@ def required_triangular_number_index(factor_limit)
   end
 end
 
-# puts triangular_number(required_triangular_number_index(200))
+puts triangular_number(required_triangular_number_index(500))
